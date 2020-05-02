@@ -30,14 +30,14 @@ $(document).ready(function () {
 
     if (!storeData) {
       var storeData = [];
-      for (var j = 0; j < calendarLength; j++) {
+      for (var j = 0; j < calLength; j++) {
         storeData.push("");
       }
     }
     $("article").append(`<div class="row tblk">
     <h6 class="text-center col-1 p-0 pt-4 border-top">${clock}</h6>
     <textarea class="col-10 textInput" name="${i}" id="t${i}" cols="100" rows="2">${storeData[i]}</textarea>
-    <button class="btnSubmit col-1 fas fa-play btn-secondary" id="${i}"></button>
+    <button class="btnSubmit col-1 fas fa-sign-in-alt btn-secondary" id="${i}"></button>
   </div>
     `);
   }
@@ -52,6 +52,12 @@ $(document).ready(function () {
   });
 
   // alert?
-  //reset to clear out schedule
-  //$("#reset")
+  //reset to clear out schedule - localstorage AND html
+  $("#reset").on("click", function () {
+    window.localStorage.removeItem("storeData");
+    storeData = null;
+    window.setTimeout(function () {
+      window.location.href = "index.html";
+    }, 1000);
+  });
 });

@@ -40,4 +40,4 @@ You will be employer-ready if you can answer the following questions:
 - Moment.js is functional
 - API quote for fun.
 - Store to LocalStorage is functional
-- Added reset button not workin yet.
+- Added reset button - clears localStorage + HTML!!
