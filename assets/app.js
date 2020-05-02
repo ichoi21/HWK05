@@ -43,7 +43,7 @@ $(document).ready(function () {
 
     //place a new hour row with the counter above
     $("article").append(`<div class="row tblk">
-    <div class="text-center col-1 p-0 pt-4 border-top">${clock} ${ampm} (${i}00) </div>
+    <div class="text-center col-1 p-0 pt-4 border-top">${clock} ${ampm} </br>(${i}00) </div>
     <textarea class="col-10 textInput" name="${i}" id="tr${i}" cols="100" rows="2">${storeData[i]}</textarea>
     <button class="btnSubmit btn col-1 fas fa-sign-in-alt btn-secondary" id="${i}"></button>
     </div>
