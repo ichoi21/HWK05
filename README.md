@@ -36,7 +36,7 @@ You will be employer-ready if you can answer the following questions:
 ## Narrative on steps taken.
 
 - Setup Repo to start upload for back ups and live testings.
-- Setup initial HTML format.
+- Setup initial HTML format - pushed table from JS instead.
 - Moment.js is functional
 - API quote for fun.
 - Store to LocalStorage is functional
