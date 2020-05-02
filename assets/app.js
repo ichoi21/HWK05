@@ -37,7 +37,7 @@ $(document).ready(function () {
     $("article").append(`<div class="row tblk">
     <h6 class="text-center col-1 p-0 pt-4 border-top">${clock}</h6>
     <textarea class="col-10 textInput" name="${i}" id="t${i}" cols="100" rows="2">${storeData[i]}</textarea>
-    <button class="btnSubmit col-1 fas fa-play btn-warning" id="${i}"></button>
+    <button class="btnSubmit col-1 fas fa-play btn-secondary" id="${i}"></button>
   </div>
     `);
   }
@@ -50,4 +50,8 @@ $(document).ready(function () {
     window.localStorage.setItem("storeData", JSON.stringify(storeData));
     console.log(storeData);
   });
+
+  // alert?
+  //reset to clear out schedule
+  //$("#reset")
 });
