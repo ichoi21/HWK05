@@ -1,8 +1,6 @@
 $(document).ready(function () {
   var time = moment().format("HH");
   var displayTime = "";
-  var currentTime = "";
-  var currentDate = "";
   var calLength = 19;
   var clock = 0;
   var mili = 0;
@@ -29,12 +27,12 @@ $(document).ready(function () {
 
   //function to display schedule in a table with counter
   for (var i = 5; i < calLength; i++) {
-    if (i < 19) {
+    if (i < 13) {
       clock = i;
-      ampm = "am";
+      ampm = "AM";
     } else {
       clock = i - 12;
-      ampm = "pm";
+      ampm = "PM";
     }
     if (!storeData) {
       var storeData = [];
@@ -45,7 +43,7 @@ $(document).ready(function () {
 
     //place a new hour row with the counter above
     $("article").append(`<div class="row tblk">
-    <div class="text-center col-1 p-0 pt-4 border-top">${clock}00</div>
+    <div class="text-center col-1 p-0 pt-4 border-top">${clock} ${ampm} (${i}00) </div>
     <textarea class="col-10 textInput" name="${i}" id="tr${i}" cols="100" rows="2">${storeData[i]}</textarea>
     <button class="btnSubmit btn col-1 fas fa-sign-in-alt btn-secondary" id="${i}"></button>
     </div>
@@ -53,10 +51,10 @@ $(document).ready(function () {
 
     //coloring blocks for time past, future, and present
     if (i < time) {
-      $(`#tr${i}`).attr("style", "background-color: #9c7878; color: grey;");
+      $(`#tr${i}`).attr("style", "background-color: #9c78788f; color: grey;");
     }
     if (i - 1 > time) {
-      $(`#tr${i}`).attr("style", "background-color: #83a693; color: white;");
+      $(`#tr${i}`).attr("style", "background-color: #83a6938f; color: white;");
     }
     $(`#t${time}`).attr("style", "background-color: ; color: black;");
   }

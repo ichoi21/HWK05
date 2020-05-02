@@ -41,4 +41,4 @@ You will be employer-ready if you can answer the following questions:
 - API quote for fun.
 - Store to LocalStorage is functional
 - Added reset button - clears localStorage + HTML!!
-- added color of hour rows to change with real time
+- added color of hour rows to change with real time.
