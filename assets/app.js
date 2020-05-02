@@ -1,86 +1,53 @@
 $(document).ready(function () {
-  var scheduleArr = [];
-  var scheduleObj = {};
-  var dateArr = [];
-  var dateObj = {};
-  var storedSchedule;
-  var savedSchedule;
-  var date = moment().format("LL");
-  previous = 0;
-  next = 0;
-  day = 0;
+  var displayDate = "";
+  var displayTime = "";
+  var calLength = 19;
+  var clock = 0;
+  var ampm = "";
 
-  dynamicTime();
-
-  function init() {
-    storeDate();
-    updateTime();
-    displaySchedule();
-    scheduleFocus();
-    saveEvent();
-    clearSchedule();
-  }
-
-  function storeDate() {
-    savedSchedule = JSON.parse(localStorage.getItem(date));
-
-    if (savedSchedule === null) {
-      console.log("creating");
-      dateObj["date"] = date;
-      dateArr.push(dateObj);
-      localStorage.setItem(date, JSON.stringify(dateArr));
+  try {
+    var storeData = JSON.parse(window.localStorage.getItem("storeData"));
+  } catch {
+    var storeData = [];
+    for (var i = 0; i < calendarLength; i++) {
+      storeData.push("");
     }
   }
 
-  function dynamicTime() {
-    var currentTime = moment().format("HH:mm:ss");
-    $("#dynamic-time").text(currentTime);
-    setInterval(dynamicTime, 1000);
-
-    var currentDate = moment().format("dddd, MMMM Do");
-    var currentYear = moment().format("YYYY");
+  var updateTime = function () {
+    var time = moment().format("LTS");
+    var currentDate = moment().format("dddd, MMMM Do, YYYY");
     $("#title-date").html(currentDate);
-    $("#title-year").html(currentYear);
-  }
+    $("#title-time").html(time);
+  };
+  updateTime();
+  setInterval(updateTime, 1000);
 
-  function scheduleFocus() {}
-
-  function clearSchedule() {
-    $("#clearBtn").on("click", function () {});
-  }
-
-  function displaySchedule() {
-    savedSchedule = JSON.parse(localStorage.getItem(date));
-    $(".input-area").val("");
-    for (var i = 0; i < savedSchedule.length; i++) {
-      var getKey = Object.keys(savedSchedule[i]);
-      var getValue = Object.values(savedSchedule[i]);
-      $("#area-" + getKey).val(getValue[0]);
+  for (var i = 5; i < calLength; i++) {
+    if (i < 19) {
+      clock = i;
     }
-  }
 
-  //
-
-  function saveEvent() {
-    $(".save-button").on("click", function () {
-      var trId = $(this).closest("tr").attr("id");
-      var textAreaVal = $(this).closest("tr").find("textarea").val().trim();
-
-      storedSchedule = JSON.parse(localStorage.getItem(date));
-      scheduleObj = {};
-
-      scheduleObj[trId] = textAreaVal;
-      scheduleArr.push(scheduleObj);
-      localStorage.setItem(date, JSON.stringify(scheduleArr));
-
-      for (var i = 0; i < storedSchedule.length; i++) {
-        if (storedSchedule[i].hasOwnProperty(trId)) {
-          storedSchedule[i][trId] = textAreaVal;
-          scheduleArr = storedSchedule;
-          localStorage.setItem(date, JSON.stringify(scheduleArr));
-          return;
-        }
+    if (!storeData) {
+      var storeData = [];
+      for (var j = 0; j < calendarLength; j++) {
+        storeData.push("");
       }
-    });
+    }
+    $("article").append(`<div class="row tblk">
+    <h6 class="text-center col-1 p-0 pt-4 border-top">${clock}</h6>
+    <textarea class="col-10 textInput" name="${i}" id="t${i}" cols="100" rows="2">${storeData[i]}</textarea>
+    <button class="btnSubmit col-1 fas fa-play btn-warning" id="${i}"></button>
+  </div>
+    `);
   }
+
+  $(document).on("click", ".btnSubmit", function () {
+    var id = $(this).attr("id");
+    var userInput = $(`#t${id}`).val();
+    storeData.splice(id, 1, userInput);
+
+    window.localStorage.setItem("storeData", JSON.stringify(storeData));
+    console.log(storeData);
+  });
 });
